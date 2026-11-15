@@ -1,10 +1,63 @@
-# OS / Editor
+# ==========================================
+# OS & Editor
+# ==========================================
 .DS_Store
 Thumbs.db
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Temp
+# ==========================================
+# Dependencies & Caches
+# ==========================================
+node_modules/
+.npm
+.eslintcache
+.pnp
+.pnp.js
+
+# ==========================================
+# Build & Distribution (React / Vite / Node)
+# ==========================================
+dist/
+dist-ssr/
+build/
+coverage/
+*.local
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Logs & Debug
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================================
+# Temporary, Backup & Office / LibreOffice Lock Files
+# ==========================================
 *.tmp
 *.bak
 ~$*
+.~lock.*
+
+# ==========================================
+# User Uploaded Media (Local Dev Storage)
+# ==========================================
+uploads/
+!uploads/.gitkeep
