@@ -87,8 +87,8 @@ export default function AuthPage({ defaultMode = 'login' }) {
             </h1>
             <p style={{ margin: '6px 0 0', fontSize: 13, color: '#64748B' }}>
               {isRegister
-                ? 'Tài khoản sinh viên mới sẽ được mặc định gán quyền USER'
-                : 'Kết nối trực tiếp tới Backend API & Supabase PostgreSQL'}
+                ? 'Tạo tài khoản để đăng tin và theo dõi đồ thất lạc'
+                : 'Đăng nhập vào hệ thống Tìm kiếm Đồ thất lạc'}
             </p>
           </div>
 
@@ -190,7 +190,6 @@ export default function AuthPage({ defaultMode = 'login' }) {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)"
                 style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: 14 }}
               />
             </div>
@@ -205,7 +204,6 @@ export default function AuthPage({ defaultMode = 'login' }) {
                     type="text"
                     value={studentId}
                     onChange={(e) => setStudentId(e.target.value)}
-                    placeholder="23IT001"
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: 14 }}
                   />
                 </div>
@@ -217,7 +215,6 @@ export default function AuthPage({ defaultMode = 'login' }) {
                     type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="0905123456"
                     style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: 14 }}
                   />
                 </div>
@@ -248,7 +245,7 @@ export default function AuthPage({ defaultMode = 'login' }) {
             <div style={{ marginTop: 20, paddingTop: 14, borderTop: '1px dashed #E2E8F0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#475569', marginBottom: 8, fontWeight: 600 }}>
                 <KeyRound size={14} />
-                <span>Điền nhanh tài khoản nhóm để test phân quyền (Pass: Test@123456):</span>
+                <span>Tài khoản thử nghiệm nhanh:</span>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {QUICK_ACCOUNTS.map((acc) => (

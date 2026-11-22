@@ -230,11 +230,11 @@ export default function AdminDashboardPage() {
               <div className="a01-chart-legend">
                 <div className="legend-item">
                   <span className="legend-dot-found" />
-                  <span>FOUND (Nhặt được)</span>
+                  <span>Nhặt được</span>
                 </div>
                 <div className="legend-item">
                   <span className="legend-dot-lost" />
-                  <span>LOST (Báo mất)</span>
+                  <span>Báo mất</span>
                 </div>
               </div>
 

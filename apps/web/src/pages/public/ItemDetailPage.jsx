@@ -183,7 +183,7 @@ export default function ItemDetailPage() {
         ...prev,
         images: [...(prev.images || []), ...added],
       }))
-      setActionMsg(`✅ Đã tải lên thêm ${added.length} ảnh và lưu vào database!`)
+      setActionMsg(`✅ Đã tải lên ${added.length} ảnh mới thành công!`)
     } catch (err) {
       setActionMsg(`❌ ${err.message}`)
     } finally {
@@ -311,7 +311,7 @@ export default function ItemDetailPage() {
           <img src={claimBoxMascot} alt="" className="p03-cta-mascot-img" />
           <h3 className="p03-cta-title">Bạn nhặt được món đồ này?</h3>
           <p className="p03-cta-desc">
-            Đây là tin Báo mất (LOST). Hãy đăng tin Nhặt được (FOUND) hoặc liên hệ Phòng Công tác sinh viên để hỗ trợ bàn giao cho chủ nhân.
+            Đây là tin Báo mất. Hãy đăng tin nếu bạn nhặt được đồ hoặc liên hệ Phòng Công tác sinh viên để hỗ trợ bàn giao cho chủ nhân.
           </p>
           <Link
             to="/items/new?type=FOUND"
@@ -319,7 +319,7 @@ export default function ItemDetailPage() {
             style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
           >
             <Send size={14} />
-            <span>Đăng tin nhặt được (FOUND)</span>
+            <span>Đăng tin nhặt được đồ</span>
           </Link>
         </div>
       )
@@ -331,7 +331,7 @@ export default function ItemDetailPage() {
           <img src={claimBoxMascot} alt="" className="p03-cta-mascot-img" />
           <h3 className="p03-cta-title">Bạn là chủ nhân của món đồ?</h3>
           <p className="p03-cta-desc">
-            Đăng nhập bằng tài khoản sinh viên VKU để gửi bằng chứng riêng tư (Proof Privacy) nhận lại đồ thất lạc.
+            Đăng nhập bằng tài khoản sinh viên để gửi thông tin xác minh và nhận lại đồ thất lạc.
           </p>
           <Link
             to="/login"
@@ -351,7 +351,7 @@ export default function ItemDetailPage() {
           <img src={claimBoxMascot} alt="" className="p03-cta-mascot-img" />
           <h3 className="p03-cta-title">Tin đăng do bạn tạo</h3>
           <p className="p03-cta-desc">
-            Bằng chứng của người đến nhận đồ sẽ được bảo mật riêng tư để Cán bộ hỗ trợ đối chiếu và xác nhận bàn giao.
+            Bằng chứng của người đến nhận đồ sẽ được bảo mật để Cán bộ hỗ trợ đối chiếu và xác nhận bàn giao.
           </p>
         </div>
       )
@@ -362,7 +362,7 @@ export default function ItemDetailPage() {
         <img src={claimBoxMascot} alt="" className="p03-cta-mascot-img" />
         <h3 className="p03-cta-title">Bạn là chủ nhân của món đồ?</h3>
         <p className="p03-cta-desc">
-          Mọi bằng chứng bạn gửi (mô tả đặc điểm, serial, ảnh minh chứng) chỉ bạn và Cán bộ hỗ trợ được phép xem.
+          Mọi thông tin và hình ảnh minh chứng bạn gửi được bảo mật, chỉ Cán bộ hỗ trợ có thẩm quyền xem.
         </p>
 
         {claimFeedback.text && (
@@ -614,7 +614,7 @@ export default function ItemDetailPage() {
 
         {loading ? (
           <div style={{ padding: 48, textAlign: 'center', background: '#fff', borderRadius: 16 }}>
-            Đang tải chi tiết tin từ Supabase...
+            Đang tải thông tin chi tiết...
           </div>
         ) : error ? (
           <div
@@ -740,12 +740,12 @@ export default function ItemDetailPage() {
               <div className="p03-info-col">
                 <div className="p03-badges-row">
                   <span className={item.itemType === 'FOUND' ? 'p03-badge-found-solid' : 'm01-type-badge m01-type-lost'}>
-                    {item.itemType === 'FOUND' ? 'Nhặt được (FOUND)' : 'Báo mất (LOST)'}
+                    {item.itemType === 'FOUND' ? 'Nhặt được' : 'Báo mất'}
                   </span>
                   <span className="p03-badge-open">{item.businessStatus}</span>
                   {item.publicationStatus === 'HIDDEN' && (
                     <span style={{ padding: '4px 10px', borderRadius: 999, background: '#374151', color: '#fff', fontSize: 11, fontWeight: 700 }}>
-                      ĐANG BỊ ẨN (HIDDEN)
+                      ĐÃ ẨN
                     </span>
                   )}
                 </div>
@@ -911,7 +911,7 @@ export default function ItemDetailPage() {
 
               {isStaff && (
                 <div className="p03-poster-card" style={{ gap: 10 }}>
-                  <span className="p03-card-heading">Kiểm duyệt nhanh (Staff / Admin)</span>
+                  <span className="p03-card-heading">Kiểm duyệt tin đăng</span>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {item.publicationStatus === 'APPROVED' ? (
                       <button
@@ -922,7 +922,7 @@ export default function ItemDetailPage() {
                         style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
                       >
                         <EyeOff size={14} />
-                        <span>Ẩn tin đăng (HIDDEN)</span>
+                        <span>Ẩn tin đăng</span>
                       </button>
                     ) : (
                       <button
@@ -933,7 +933,7 @@ export default function ItemDetailPage() {
                         style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
                       >
                         <Eye size={14} />
-                        <span>Khôi phục hiển thị (APPROVED)</span>
+                        <span>Khôi phục hiển thị</span>
                       </button>
                     )}
 

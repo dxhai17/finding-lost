@@ -230,11 +230,11 @@ export default function StaffDashboardPage() {
               <div className="a01-chart-legend">
                 <div className="legend-item">
                   <span className="legend-dot-found" />
-                  <span>Nhặt được (FOUND)</span>
+                  <span>Nhặt được</span>
                 </div>
                 <div className="legend-item">
                   <span className="legend-dot-lost" />
-                  <span>Báo mất (LOST)</span>
+                  <span>Báo mất</span>
                 </div>
               </div>
 
@@ -484,7 +484,7 @@ export default function StaffDashboardPage() {
         key={`staff-hide-${rejectItemTarget?.id || 'none'}`}
         open={Boolean(rejectItemTarget)}
         title={`Ẩn tin đăng #${rejectItemTarget?.id || ''}`}
-        description={`Tin "${rejectItemTarget?.title || ''}" sẽ chuyển sang HIDDEN (vẫn giữ nguyên trạng thái OPEN/CLOSED).`}
+        description={`Tin "${rejectItemTarget?.title || ''}" sẽ được chuyển sang trạng thái ẩn.`}
         fieldLabel="Lý do ẩn tin"
         confirmLabel="Xác nhận ẩn tin"
         submitting={submitting}

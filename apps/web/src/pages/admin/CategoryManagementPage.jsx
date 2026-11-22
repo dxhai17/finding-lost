@@ -274,7 +274,7 @@ export default function CategoryManagementPage() {
               Quản lý danh mục
             </h1>
             <p className="a01-banner-subtitle">
-              Quản lý các danh mục đồ vật (ví, điện thoại, balo, sách, ...) trên Supabase.
+              Quản lý danh mục và phân loại đồ vật trong toàn trường.
             </p>
           </div>
           <img src={bannerMascot} alt="" className="a01-banner-img" />
@@ -515,7 +515,7 @@ export default function CategoryManagementPage() {
 
               <div className="a03-form-group">
                 <label htmlFor="cat-slug-input" className="a03-form-label">
-                  Đường dẫn tĩnh (Slug — để trống sẽ tự tạo)
+                  Đường dẫn tĩnh (Slug)
                 </label>
                 <input
                   id="cat-slug-input"
