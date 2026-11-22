@@ -87,7 +87,7 @@ export default function AuthPage({ defaultMode = 'login' }) {
             </h1>
             <p style={{ margin: '6px 0 0', fontSize: 13, color: '#64748B' }}>
               {isRegister
-                ? 'Tạo tài khoản để đăng tin và theo dõi đồ thất lạc'
+                ? 'Tạo tài khoản'
                 : 'Đăng nhập vào hệ thống Tìm kiếm Đồ thất lạc'}
             </p>
           </div>
