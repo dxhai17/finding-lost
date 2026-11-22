@@ -426,7 +426,7 @@ export default function AuditLogPage() {
                     <div className="a04-detail-actor">
                       <div className="a04-detail-actor-info">
                         <span className="a04-detail-actor-name">{selectedLog.actor?.fullName}</span>
-                        <span className="a04-detail-actor-email">({selectedLog.actor?.email})</span>
+                        <span className="a04-detail-actor-email">{selectedLog.actor?.email}</span>
                       </div>
                       <img src={avatarDefault} alt={selectedLog.actor?.fullName || ''} className="a04-detail-actor-avatar" />
                     </div>

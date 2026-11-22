@@ -400,7 +400,7 @@ export default function ClaimsManagementPage() {
                 <div className="m03-section-block">
                   <div className="m03-section-title">
                     <Package size={15} />
-                    <span>Tin nhặt được liên quan (FOUND)</span>
+                    <span>Tin nhặt được liên quan</span>
                   </div>
                   <div className="m03-linked-item-card">
                     <img src={getItemThumbnail(selectedClaim.item)} alt={selectedClaim.item?.title || ''} className="m03-linked-thumb" />
@@ -516,7 +516,7 @@ export default function ClaimsManagementPage() {
                           style={{ textDecoration: 'none' }}
                         >
                           <Check size={14} />
-                          <span>Xác nhận bàn giao (ACCEPTED)</span>
+                          <span>Xác nhận bàn giao</span>
                         </Link>
                         <button
                           type="button"
@@ -525,7 +525,7 @@ export default function ClaimsManagementPage() {
                           onClick={() => setRejectOpen(true)}
                         >
                           <XCircle size={14} />
-                          <span>Từ chối yêu cầu (REJECTED)</span>
+                          <span>Từ chối yêu cầu</span>
                         </button>
                       </>
                     )}
@@ -549,7 +549,7 @@ export default function ClaimsManagementPage() {
         key={`reject-claim-${selectedClaim?.id || 'none'}`}
         open={rejectOpen}
         title={`Từ chối yêu cầu #CLM-${selectedClaim?.id || ''}`}
-        description="Vui lòng ghi rõ lý do từ chối (ví dụ: thông tin nhận dạng hoặc serial chưa trùng khớp) để lưu Audit Log."
+        description="Vui lòng ghi rõ lý do từ chối yêu cầu nhận đồ này."
         fieldLabel="Lý do từ chối"
         confirmLabel="Xác nhận từ chối"
         submitting={submitting}

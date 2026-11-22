@@ -261,8 +261,8 @@ export default function ItemModerationPage() {
                   onChange={(e) => { setTypeFilter(e.target.value); setPage(1) }}
                 >
                   <option value="ALL">Tất cả loại tin</option>
-                  <option value="FOUND">FOUND (Nhặt được)</option>
-                  <option value="LOST">LOST (Báo mất)</option>
+                  <option value="FOUND">Nhặt được</option>
+                  <option value="LOST">Báo mất</option>
                 </select>
                 <select
                   aria-label="Sắp xếp tin đăng"
@@ -523,7 +523,7 @@ export default function ItemModerationPage() {
                       onClick={() => setReasonModal({ open: true, targetStatus: 'HIDDEN' })}
                     >
                       <EyeOff size={13} />
-                      <span>Ẩn tin (HIDDEN)</span>
+                      <span>Ẩn tin đăng</span>
                     </button>
                   )}
                 </div>

@@ -271,7 +271,7 @@ export default function UserManagementPage() {
                   onChange={(e) => { setRoleFilter(e.target.value); setPage(1) }}
                 >
                   <option value="ALL">Tất cả vai trò</option>
-                  <option value="USER">USER (Sinh viên)</option>
+                  <option value="USER">Sinh viên</option>
                   <option value="MODERATOR">MODERATOR</option>
                   <option value="ADMIN">ADMIN</option>
                 </select>
@@ -283,8 +283,8 @@ export default function UserManagementPage() {
                   onChange={(e) => { setStatusFilter(e.target.value); setPage(1) }}
                 >
                   <option value="ALL">Tất cả trạng thái</option>
-                  <option value="ACTIVE">Hoạt động (ACTIVE)</option>
-                  <option value="SUSPENDED">Đã khóa (SUSPENDED)</option>
+                  <option value="ACTIVE">Đang hoạt động</option>
+                  <option value="SUSPENDED">Đã bị khóa</option>
                 </select>
 
                 <button
@@ -533,7 +533,7 @@ export default function UserManagementPage() {
                       onClick={handleUpdateRole}
                     >
                       <UserCheck size={18} />
-                      <span>Lưu vai trò ({draftRole})</span>
+                      <span>Lưu vai trò</span>
                     </button>
 
                     <button

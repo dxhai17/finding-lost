@@ -107,7 +107,7 @@ export default function ExploreItemsPage() {
           <div className="p02-banner-text">
             <h1 className="p02-banner-title">Tìm đồ thất lạc</h1>
             <p className="p02-banner-subtitle">
-              Tra cứu trực tiếp từ cơ sở dữ liệu Supabase — tin bị ẩn tự động giấu khỏi người ngoài quyền.
+              Tra cứu thông tin đồ thất lạc và nhặt được trong toàn trường nhanh chóng, chính xác.
             </p>
           </div>
 
@@ -168,7 +168,7 @@ export default function ExploreItemsPage() {
                     <span className={`p02-custom-check ${selectedType === 'lost' ? 'checked' : ''}`}>
                       {selectedType === 'lost' && <Check size={11} />}
                     </span>
-                    <span>Báo mất (LOST)</span>
+                    <span>Báo mất</span>
                   </div>
                   <span className="m01-type-badge m01-type-lost">LOST</span>
                 </div>
@@ -181,7 +181,7 @@ export default function ExploreItemsPage() {
                     <span className={`p02-custom-check ${selectedType === 'found' ? 'checked' : ''}`}>
                       {selectedType === 'found' && <Check size={11} />}
                     </span>
-                    <span>Nhặt được (FOUND)</span>
+                    <span>Nhặt được</span>
                   </div>
                   <span className="m01-type-badge m01-type-found">FOUND</span>
                 </div>
@@ -290,7 +290,7 @@ export default function ExploreItemsPage() {
 
             {loading ? (
               <div style={{ padding: 40, textAlign: 'center', color: '#64748B' }}>
-                Đang tìm kiếm dữ liệu thật từ Supabase...
+                Đang tải danh sách đồ thất lạc...
               </div>
             ) : items.length === 0 ? (
               <div

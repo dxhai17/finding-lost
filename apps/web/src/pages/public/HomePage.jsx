@@ -189,7 +189,7 @@ export default function HomePage() {
           <div className="p01-latest-header">
             <div className="p01-latest-title">
               <Sparkles size={18} />
-              <span>Tin mới nhất (Dữ liệu thật từ Supabase)</span>
+              <span>Tin mới nhất</span>
             </div>
 
             <div className="p01-latest-filter-tabs">
@@ -206,7 +206,7 @@ export default function HomePage() {
                 onClick={() => handleSelectFilter('lost')}
               >
                 <Flame size={12} color={activeFilter === 'lost' ? '#FFFFFF' : '#E65100'} />
-                <span>Báo mất (LOST)</span>
+                <span>Báo mất</span>
               </button>
               <button
                 type="button"
@@ -214,7 +214,7 @@ export default function HomePage() {
                 onClick={() => handleSelectFilter('found')}
               >
                 <Check size={12} color={activeFilter === 'found' ? '#FFFFFF' : '#2E7D32'} />
-                <span>Nhặt được (FOUND)</span>
+                <span>Nhặt được</span>
               </button>
             </div>
 
@@ -226,7 +226,7 @@ export default function HomePage() {
 
           {loading ? (
             <div style={{ padding: 32, textAlign: 'center', color: '#64748B' }}>
-              Đang tải dữ liệu từ Backend & Supabase...
+              Đang tải danh sách tin mới...
             </div>
           ) : items.length === 0 ? (
             <div style={{ padding: 32, textAlign: 'center', color: '#64748B' }}>

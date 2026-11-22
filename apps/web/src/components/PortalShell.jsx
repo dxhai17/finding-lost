@@ -187,7 +187,7 @@ export default function PortalShell({
                     onClick={() => setRoleMenuOpen(false)}
                   >
                     <Crown size={14} color="#D48806" />
-                    <span>Quản trị viên (Admin)</span>
+                    <span>Quản trị viên</span>
                   </Link>
                 )}
                 <Link
@@ -196,7 +196,7 @@ export default function PortalShell({
                   onClick={() => setRoleMenuOpen(false)}
                 >
                   <User size={14} color="#2E7D32" />
-                  <span>Cán bộ hỗ trợ (Staff)</span>
+                  <span>Cán bộ hỗ trợ</span>
                 </Link>
               </div>
             )}

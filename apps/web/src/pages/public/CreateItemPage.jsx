@@ -175,8 +175,8 @@ export default function CreateItemPage() {
                       onChange={(e) => setItemType(e.target.value)}
                       style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: 14 }}
                     >
-                      <option value="LOST">LOST (Tôi bị mất đồ)</option>
-                      <option value="FOUND">FOUND (Tôi nhặt được đồ)</option>
+                      <option value="LOST">Báo mất đồ</option>
+                      <option value="FOUND">Nhặt được đồ</option>
                     </select>
                   </div>
 
@@ -253,10 +253,10 @@ export default function CreateItemPage() {
                   </div>
                 </div>
 
-                {/* Upload ảnh đính kèm (lưu vào bảng item_images) */}
+                {/* Upload ảnh đính kèm */}
                 <div>
                   <label style={{ display: 'block', fontSize: 12, fontWeight: 700, marginBottom: 6, color: '#374151' }}>
-                    Hình ảnh sản phẩm (tối đa 5 ảnh, mỗi ảnh ≤ 5MB)
+                    Hình ảnh sản phẩm
                   </label>
 
                   <label

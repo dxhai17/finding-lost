@@ -48,7 +48,7 @@ export default function ClaimVerificationHandoverPage() {
 
   const [checks, setChecks] = useState({ descMatch: true, proofValid: true, directVerify: true })
   const [handoverAt, setHandoverAt] = useState(getDefaultLocalDateTime)
-  const [handoverLocation, setHandoverLocation] = useState('Phòng Công tác sinh viên (A101)')
+  const [handoverLocation, setHandoverLocation] = useState('Phòng Công tác sinh viên - A101')
   const [noteText, setNoteText] = useState('Đã đối chiếu thông tin và bàn giao thành công.')
 
   const [submitting, setSubmitting] = useState(false)
@@ -499,8 +499,8 @@ export default function ClaimVerificationHandoverPage() {
                         value={handoverLocation}
                         onChange={(e) => setHandoverLocation(e.target.value)}
                       >
-                        <option value="Phòng Công tác sinh viên (A101)">Phòng Công tác sinh viên (A101)</option>
-                        <option value="Phòng Đoàn - Hội (B202)">Phòng Đoàn - Hội (B202)</option>
+                        <option value="Phòng Công tác sinh viên - A101">Phòng Công tác sinh viên - A101</option>
+                        <option value="Phòng Đoàn - Hội - B202">Phòng Đoàn - Hội - B202</option>
                         <option value="Thư viện tầng 1">Thư viện tầng 1</option>
                       </select>
                     </div>
