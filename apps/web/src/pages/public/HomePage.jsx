@@ -9,8 +9,8 @@ import { useAuth } from '../../contexts/useAuth'
 import { itemService } from '../../services/itemService'
 import { getItemThumbnail, formatShortDate } from '../../utils/itemImageHelper'
 import heroCampusMascot from '../../assets/home/hero-campus-mascot.png'
-import iconLostBackpack from '../../assets/home/icon-lost-backpack.png'
-import iconFoundBox from '../../assets/home/icon-found-box.png'
+import iconLostBackpack from '../../assets/svg/icons/lost-icon.png'
+import iconFoundBox from '../../assets/svg/icons/found.png'
 import './Home.css'
 
 export default function HomePage() {
