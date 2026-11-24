@@ -13,7 +13,7 @@ import { resolveUploadUrl } from '../../services/apiClient'
 import { itemService } from '../../services/itemService'
 import { claimService } from '../../services/claimService'
 import { getItemThumbnail, formatShortDate, formatDateTime } from '../../utils/itemImageHelper'
-import claimBoxMascot from '../../assets/detail/claim-box-mascot.png'
+import claimBoxMascot from '../../assets/mascot/04_thung_do_hop_do.svg'
 import './Home.css'
 import './ExploreItems.css'
 import './ItemDetail.css'
@@ -128,13 +128,17 @@ export default function ItemDetailPage() {
 
   const isOwner = isAuthenticated && item && Number(currentUser.id) === Number(item.userId)
   const isStaff = isAuthenticated && ['ADMIN', 'MODERATOR'].includes(currentUser.role)
-  const canManageImages = Boolean(item && (isStaff || (isOwner && item.businessStatus === 'OPEN')))
+  // Chỉ chính người đăng tin mới có quyền thêm/xóa ảnh, Admin và Moderator không được xóa ảnh của user
+  const canManageImages = Boolean(item && isOwner && item.businessStatus === 'OPEN')
 
   const uploadedImages = item?.images || []
-  const mainPhotoSrc =
+  const activeImage =
     uploadedImages.length > 0
-      ? resolveUploadUrl(uploadedImages[Math.min(activeImageIdx, uploadedImages.length - 1)]?.storageUrl)
-      : getItemThumbnail(item)
+      ? uploadedImages[Math.min(activeImageIdx, Math.max(0, uploadedImages.length - 1))]
+      : null
+  const mainPhotoSrc = activeImage
+    ? resolveUploadUrl(activeImage.storageUrl)
+    : getItemThumbnail(item)
 
   const handleSaveEdit = async (e) => {
     e.preventDefault()
@@ -666,77 +670,129 @@ export default function ItemDetailPage() {
                   </button>
                 </div>
 
-                {uploadedImages.length > 0 && (
-                  <div className="p03-thumbs-row" style={{ flexWrap: 'wrap' }}>
+                {/* Dải ảnh thu nhỏ chỉ hiển thị khi có từ 2 ảnh trở lên (tránh lặp lại ảnh đơn) */}
+                {uploadedImages.length > 1 && (
+                  <div className="p03-thumbs-row" style={{ display: 'flex', gap: 8, marginTop: 10, overflowX: 'auto', paddingBottom: 4 }}>
                     {uploadedImages.map((img, idx) => (
                       <div
                         key={img.id}
                         className={`p03-sub-thumb ${idx === activeImageIdx ? 'active' : ''}`}
                         onClick={() => setActiveImageIdx(idx)}
-                        style={{ position: 'relative' }}
+                        style={{
+                          width: 52,
+                          height: 52,
+                          minWidth: 52,
+                          flex: '0 0 52px',
+                          borderRadius: 8,
+                          overflow: 'hidden',
+                          border: idx === activeImageIdx ? '2px solid #2E7D32' : '1.5px solid #ECE7DE',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease',
+                          boxShadow: idx === activeImageIdx ? '0 0 0 2px rgba(46, 125, 50, 0.2)' : 'none',
+                        }}
                       >
-                        <img src={resolveUploadUrl(img.storageUrl)} alt="" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
-                        {canManageImages && (
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              handleDeleteImage(img.id)
-                            }}
-                            title="Xóa ảnh"
-                            style={{
-                              position: 'absolute',
-                              top: 2,
-                              right: 2,
-                              width: 18,
-                              height: 18,
-                              borderRadius: '50%',
-                              border: 'none',
-                              background: 'rgba(185, 28, 28, 0.85)',
-                              color: '#fff',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              cursor: 'pointer',
-                            }}
-                          >
-                            <Trash2 size={10} />
-                          </button>
-                        )}
+                        <img
+                          src={resolveUploadUrl(img.storageUrl)}
+                          alt=""
+                          style={{ objectFit: 'cover', width: '100%', height: '100%', display: 'block' }}
+                        />
                       </div>
                     ))}
                   </div>
                 )}
 
-                {canManageImages && uploadedImages.length < 5 && (
-                  <label
+                {/* Khu vực quản lý ảnh dành riêng cho chính chủ đăng tin (Tách nút xóa sang bên cạnh, cân đối) */}
+                {canManageImages && (
+                  <div
                     style={{
-                      display: 'inline-flex',
+                      display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 6,
-                      marginTop: 10,
-                      padding: '7px 12px',
-                      borderRadius: 8,
-                      border: '1px dashed #2E7D32',
-                      background: '#F4F9F5',
-                      color: '#2E7D32',
-                      fontSize: 12,
-                      fontWeight: 600,
-                      cursor: uploadingImg ? 'not-allowed' : 'pointer',
+                      gap: 10,
+                      marginTop: 12,
+                      width: '100%',
                     }}
                   >
-                    <ImagePlus size={14} />
-                    <span>{uploadingImg ? 'Đang tải ảnh...' : `Thêm ảnh (${uploadedImages.length}/5)`}</span>
-                    <input
-                      type="file"
-                      accept="image/jpeg,image/png,image/webp,image/gif"
-                      multiple
-                      disabled={uploadingImg}
-                      onChange={handleUploadMoreImages}
-                      style={{ display: 'none' }}
-                    />
-                  </label>
+                    {uploadedImages.length < 5 ? (
+                      <label
+                        style={{
+                          flex: 1,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6,
+                          padding: '8px 12px',
+                          borderRadius: 8,
+                          border: '1px dashed #2E7D32',
+                          background: '#F4F9F5',
+                          color: '#2E7D32',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          cursor: uploadingImg ? 'not-allowed' : 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <ImagePlus size={15} />
+                        <span>{uploadingImg ? 'Đang tải...' : `Thêm ảnh (${uploadedImages.length}/5)`}</span>
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/png,image/webp,image/gif"
+                          multiple
+                          disabled={uploadingImg}
+                          onChange={handleUploadMoreImages}
+                          style={{ display: 'none' }}
+                        />
+                      </label>
+                    ) : (
+                      <div
+                        style={{
+                          flex: 1,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6,
+                          padding: '8px 12px',
+                          borderRadius: 8,
+                          background: '#F1F5F9',
+                          color: '#64748B',
+                          fontSize: 12,
+                          fontWeight: 500,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        <span>Đã đủ 5/5 ảnh</span>
+                      </div>
+                    )}
+
+                    {/* Nút xóa ảnh tách biệt hoàn toàn khỏi thumbnail, đặt cạnh nút thêm ảnh để cân đối */}
+                    {uploadedImages.length > 0 && activeImage && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteImage(activeImage.id)}
+                        title="Xóa ảnh này khỏi tin đăng"
+                        style={{
+                          flex: 1,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 6,
+                          padding: '8px 12px',
+                          borderRadius: 8,
+                          border: '1px solid #FECACA',
+                          background: '#FEF2F2',
+                          color: '#DC2626',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <Trash2 size={15} />
+                        <span>Xóa ảnh này</span>
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
 

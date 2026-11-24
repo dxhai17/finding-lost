@@ -565,18 +565,18 @@ const uploadItemImages = async (req, res) => {
 
     const item = existingResult.rows[0];
     const isOwner = Number(item.user_id) === Number(req.user.id);
-    if (!isOwner && !isStaff(req.user)) {
+    if (!isOwner) {
       cleanupUploadedFiles(uploadedFiles);
       return res.status(403).json({
         success: false,
         error: {
           code: 'FORBIDDEN',
-          message: 'Bạn không có quyền tải ảnh lên tin đăng của người khác',
+          message: 'Chỉ chính người đăng tin mới có quyền bổ sung ảnh cho tin này',
         },
       });
     }
 
-    if (!isStaff(req.user) && item.business_status !== 'OPEN') {
+    if (item.business_status !== 'OPEN') {
       cleanupUploadedFiles(uploadedFiles);
       return res.status(409).json({
         success: false,
@@ -691,17 +691,17 @@ const deleteItemImage = async (req, res) => {
 
     const item = itemResult.rows[0];
     const isOwner = Number(item.user_id) === Number(req.user.id);
-    if (!isOwner && !isStaff(req.user)) {
+    if (!isOwner) {
       return res.status(403).json({
         success: false,
         error: {
           code: 'FORBIDDEN',
-          message: 'Bạn không có quyền xóa ảnh của tin đăng này',
+          message: 'Chỉ chính người đăng tin mới có quyền xóa ảnh của tin đăng này',
         },
       });
     }
 
-    if (!isStaff(req.user) && item.business_status !== 'OPEN') {
+    if (item.business_status !== 'OPEN') {
       return res.status(409).json({
         success: false,
         error: {
