@@ -61,3 +61,4 @@ lerna-debug.log*
 # ==========================================
 uploads/
 !uploads/.gitkeep
+record-demo.mjs

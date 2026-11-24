@@ -40,10 +40,12 @@ export default function PublicHeader() {
             <Search size={15} />
             <span>Tìm đồ</span>
           </Link>
-          <Link to="/items/new" className={isCreate ? 'p01-header-nav-pill' : 'a01-nav-link'}>
-            <PlusCircle size={15} />
-            <span>Đăng tin</span>
-          </Link>
+          {!(currentUser?.role === 'ADMIN' || currentUser?.role === 'MODERATOR') && (
+            <Link to="/items/new" className={isCreate ? 'p01-header-nav-pill' : 'a01-nav-link'}>
+              <PlusCircle size={15} />
+              <span>Đăng tin</span>
+            </Link>
+          )}
           {isAuthenticated && (
             <Link to="/my-claims" className={isMyClaims ? 'p01-header-nav-pill' : 'a01-nav-link'}>
               <Send size={15} />

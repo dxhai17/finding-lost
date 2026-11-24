@@ -306,6 +306,9 @@ export default function ItemDetailPage() {
     if (!item) return null
 
     if (item.itemType === 'LOST') {
+      if (currentUser?.role === 'ADMIN' || currentUser?.role === 'MODERATOR') {
+        return null
+      }
       return (
         <div className="p03-cta-card">
           <img src={claimBoxMascot} alt="" className="p03-cta-mascot-img" />
