@@ -5,6 +5,7 @@ import {
   ArrowRight, FileEdit, Handshake, Sprout,
 } from 'lucide-react'
 import PublicHeader from '../../components/PublicHeader'
+import { useAuth } from '../../contexts/useAuth'
 import { itemService } from '../../services/itemService'
 import { getItemThumbnail, formatShortDate } from '../../utils/itemImageHelper'
 import heroCampusMascot from '../../assets/home/hero-campus-mascot.png'
@@ -14,6 +15,9 @@ import './Home.css'
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const { currentUser } = useAuth()
+  const isStaffOrAdmin = currentUser?.role === 'ADMIN' || currentUser?.role === 'MODERATOR'
+
   const [activeFilter, setActiveFilter] = useState('all')
   const [searchText, setSearchText] = useState('')
   const [items, setItems] = useState([])
@@ -106,83 +110,87 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 2 Quick Action Cards */}
-        <section className="p01-quick-actions-grid">
-          <Link to="/items/new?type=LOST" className="p01-action-card-lost">
-            <div className="p01-action-left">
-              <img src={iconLostBackpack} alt="" className="p01-action-icon-img" />
-              <div className="p01-action-text">
-                <span className="p01-action-heading">Tôi mất đồ</span>
-                <span className="p01-action-sub">Đăng tin báo mất để cộng đồng hỗ trợ tìm lại</span>
-              </div>
-            </div>
-            <div className="p01-action-circle-btn">
-              <ArrowRight size={16} />
-            </div>
-          </Link>
+        {/* 2 Quick Action Cards & 3 Bước sử dụng (Chỉ hiển thị cho Sinh viên & Khách, ẩn với Admin/Moderator) */}
+        {!isStaffOrAdmin && (
+          <>
+            <section className="p01-quick-actions-grid">
+              <Link to="/items/new?type=LOST" className="p01-action-card-lost">
+                <div className="p01-action-left">
+                  <img src={iconLostBackpack} alt="" className="p01-action-icon-img" />
+                  <div className="p01-action-text">
+                    <span className="p01-action-heading">Tôi mất đồ</span>
+                    <span className="p01-action-sub">Đăng tin báo mất để cộng đồng hỗ trợ tìm lại</span>
+                  </div>
+                </div>
+                <div className="p01-action-circle-btn">
+                  <ArrowRight size={16} />
+                </div>
+              </Link>
 
-          <Link to="/items/new?type=FOUND" className="p01-action-card-found">
-            <div className="p01-action-left">
-              <img src={iconFoundBox} alt="" className="p01-action-icon-img" />
-              <div className="p01-action-text">
-                <span className="p01-action-heading">Tôi nhặt được đồ</span>
-                <span className="p01-action-sub">Đăng tin thông báo để trả lại đúng chủ nhân</span>
-              </div>
-            </div>
-            <div className="p01-action-circle-btn">
-              <ArrowRight size={16} />
-            </div>
-          </Link>
-        </section>
+              <Link to="/items/new?type=FOUND" className="p01-action-card-found">
+                <div className="p01-action-left">
+                  <img src={iconFoundBox} alt="" className="p01-action-icon-img" />
+                  <div className="p01-action-text">
+                    <span className="p01-action-heading">Tôi nhặt được đồ</span>
+                    <span className="p01-action-sub">Đăng tin thông báo để trả lại đúng chủ nhân</span>
+                  </div>
+                </div>
+                <div className="p01-action-circle-btn">
+                  <ArrowRight size={16} />
+                </div>
+              </Link>
+            </section>
 
-        {/* 3 Bước sử dụng đơn giản */}
-        <section className="p01-steps-section">
-          <div className="p01-steps-title">
-            <Sprout size={16} />
-            <span>3 bước sử dụng đơn giản</span>
-          </div>
+            {/* 3 Bước sử dụng đơn giản */}
+            <section className="p01-steps-section">
+              <div className="p01-steps-title">
+                <Sprout size={16} />
+                <span>3 bước sử dụng đơn giản</span>
+              </div>
 
-          <div className="p01-steps-card">
-            <div className="p01-step-block">
-              <div className="p01-step-num-circle">1</div>
-              <div className="p01-step-icon-wrap">
-                <FileEdit size={22} />
-              </div>
-              <div className="p01-step-text-col">
-                <span className="p01-step-heading">Đăng tin</span>
-                <span className="p01-step-desc">Báo mất hoặc nhặt được đồ</span>
-              </div>
-            </div>
+              <div className="p01-steps-card">
+                <div className="p01-step-block">
+                  <div className="p01-step-num-circle">1</div>
+                  <div className="p01-step-icon-wrap">
+                    <FileEdit size={22} />
+                  </div>
+                  <div className="p01-step-text-col">
+                    <span className="p01-step-heading">Đăng tin</span>
+                    <span className="p01-step-desc">Báo mất hoặc nhặt được đồ</span>
+                  </div>
+                </div>
 
-            <ArrowRight size={18} className="p01-step-divider-arrow" />
+                <ArrowRight size={18} className="p01-step-divider-arrow" />
 
-            <div className="p01-step-block">
-              <div className="p01-step-num-circle-outline">2</div>
-              <div className="p01-step-icon-wrap">
-                <Search size={22} />
-              </div>
-              <div className="p01-step-text-col">
-                <span className="p01-step-heading">Tìm & đối chiếu</span>
-                <span className="p01-step-desc">Tìm kiếm, gửi yêu cầu nhận đồ kèm bằng chứng</span>
-              </div>
-            </div>
+                <div className="p01-step-block">
+                  <div className="p01-step-num-circle-outline">2</div>
+                  <div className="p01-step-icon-wrap">
+                    <Search size={22} />
+                  </div>
+                  <div className="p01-step-text-col">
+                    <span className="p01-step-heading">Tìm & đối chiếu</span>
+                    <span className="p01-step-desc">Tìm kiếm, gửi yêu cầu nhận đồ kèm bằng chứng</span>
+                  </div>
+                </div>
 
-            <ArrowRight size={18} className="p01-step-divider-arrow" />
+                <ArrowRight size={18} className="p01-step-divider-arrow" />
 
-            <div className="p01-step-block">
-              <div className="p01-step-num-circle-outline">3</div>
-              <div className="p01-step-icon-wrap">
-                <Handshake size={22} />
+                <div className="p01-step-block">
+                  <div className="p01-step-num-circle-outline">3</div>
+                  <div className="p01-step-icon-wrap">
+                    <Handshake size={22} />
+                  </div>
+                  <div className="p01-step-text-col">
+                    <span className="p01-step-heading">
+                      Xác nhận & bàn giao <span style={{ color: '#D48806', fontSize: 11 }}>✨</span>
+                    </span>
+                    <span className="p01-step-desc">Cán bộ xác minh và hỗ trợ trao trả an toàn</span>
+                  </div>
+                </div>
               </div>
-              <div className="p01-step-text-col">
-                <span className="p01-step-heading">
-                  Xác nhận & bàn giao <span style={{ color: '#D48806', fontSize: 11 }}>✨</span>
-                </span>
-                <span className="p01-step-desc">Cán bộ xác minh và hỗ trợ trao trả an toàn</span>
-              </div>
-            </div>
-          </div>
-        </section>
+            </section>
+          </>
+        )}
 
         {/* Latest Items Section */}
         <section className="p01-latest-section">

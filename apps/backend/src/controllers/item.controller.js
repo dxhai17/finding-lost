@@ -334,6 +334,18 @@ const createItem = async (req, res) => {
   let client;
 
   try {
+    // Chặn tài khoản ADMIN và MODERATOR đăng tin báo mất hoặc nhặt được
+    if (req.user && (req.user.role === 'ADMIN' || req.user.role === 'MODERATOR')) {
+      cleanupUploadedFiles(uploadedFiles);
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'FORBIDDEN',
+          message: 'Tài khoản Quản trị viên và Cán bộ duyệt tin không được phép đăng tin',
+        },
+      });
+    }
+
     const { itemType, categoryId, title, description, approximateLocation, occurredAt } = req.body || {};
 
     if (

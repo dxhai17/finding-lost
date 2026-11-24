@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router'
 import {
   Home,
   Search,
-  PlusCircle,
   Bell,
   Crown,
   ChevronDown,
@@ -20,7 +19,7 @@ import {
 import PublicHeader from './PublicHeader'
 import { useAuth } from '../contexts/useAuth'
 import logoSrc from '../assets/svg/logo/school-lost-found-logo.svg'
-import adminAvatar from '../assets/dashboard/admin-avatar.png'
+import adminAvatar from '../assets/dashboard/admin-avatar.svg'
 
 const ADMIN_MENU = [
   { id: 'overview', label: 'Tổng quan', icon: Home, path: '/admin' },
@@ -144,10 +143,6 @@ export default function PortalShell({
           <Link to="/search" className="a01-nav-link">
             <Search size={15} />
             <span>Tìm đồ</span>
-          </Link>
-          <Link to="/items/new" className="a01-nav-link">
-            <PlusCircle size={15} />
-            <span>Đăng tin</span>
           </Link>
           <Link to="/my-claims" className="a01-nav-link">
             <Send size={15} />

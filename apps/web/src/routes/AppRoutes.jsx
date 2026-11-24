@@ -14,6 +14,16 @@ import ItemModerationPage from '../pages/staff/ItemModerationPage'
 import ClaimsManagementPage from '../pages/staff/ClaimsManagementPage'
 import ClaimVerificationHandoverPage from '../pages/staff/ClaimVerificationHandoverPage'
 
+import { useAuth } from '../contexts/useAuth'
+
+function ProtectedCreateItemRoute() {
+  const { currentUser, loadingAuth } = useAuth()
+  if (!loadingAuth && (currentUser?.role === 'ADMIN' || currentUser?.role === 'MODERATOR')) {
+    return <Navigate to={currentUser.role === 'ADMIN' ? '/admin' : '/staff'} replace />
+  }
+  return <CreateItemPage />
+}
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -22,7 +32,7 @@ export default function AppRoutes() {
       <Route path="/register" element={<AuthPage defaultMode="register" />} />
       <Route path="/search" element={<ExploreItemsPage />} />
       <Route path="/items" element={<ExploreItemsPage />} />
-      <Route path="/items/new" element={<CreateItemPage />} />
+      <Route path="/items/new" element={<ProtectedCreateItemRoute />} />
       <Route path="/my-claims" element={<MyClaimsPage />} />
       <Route path="/items/detail" element={<ItemDetailPage />} />
       <Route path="/items/:id" element={<ItemDetailPage />} />

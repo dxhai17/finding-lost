@@ -9,7 +9,14 @@ import './Home.css'
 export default function CreateItemPage() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
-  const { isAuthenticated, loadingAuth } = useAuth()
+  const { currentUser, isAuthenticated, loadingAuth } = useAuth()
+  const isStaffOrAdmin = currentUser?.role === 'ADMIN' || currentUser?.role === 'MODERATOR'
+
+  useEffect(() => {
+    if (!loadingAuth && isStaffOrAdmin) {
+      navigate(currentUser?.role === 'ADMIN' ? '/admin' : '/staff', { replace: true })
+    }
+  }, [currentUser, isStaffOrAdmin, loadingAuth, navigate])
 
   const defaultType = searchParams.get('type') === 'FOUND' ? 'FOUND' : 'LOST'
 
@@ -90,6 +97,10 @@ export default function CreateItemPage() {
     } finally {
       setSubmitting(false)
     }
+  }
+
+  if (!loadingAuth && isStaffOrAdmin) {
+    return null
   }
 
   return (
